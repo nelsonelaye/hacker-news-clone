@@ -1,0 +1,36 @@
+@import "../../styles/base.scss";
+
+h1 {
+  text-align: center;
+  color: $orange;
+  margin: 30px 0 50px;
+}
+
+nav {
+  margin: auto;
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  padding: 0 15px;
+  text-transform: uppercase;
+  color: $orange;
+  font-weight: 550;
+  font-size: 18px;
+}
+
+a:active {
+  font-weight: 600;
+}
+
+.nav-link {
+  :active {
+    font-weight: 600;
+  }
+}

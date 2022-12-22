@@ -2,7 +2,7 @@
 
 main {
   width: 60%;
-  margin: auto;
+  margin: 50px auto;
 }
 
 a {
@@ -26,5 +26,22 @@ a {
   span {
     font-size: 13px;
     color: $brownish;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  main {
+    width: 90%;
+  }
+
+  .story-highlight {
+    h2 {
+      font-size: 15px;
+      margin: 0 0 6px;
+    }
+
+    span {
+      font-size: 11px;
+    }
   }
 }

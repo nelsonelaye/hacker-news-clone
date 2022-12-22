@@ -5,6 +5,7 @@ import style from "./LandingPage.module.scss";
 import { story as StoryType } from "./LandingPage.types";
 import { ClipLoader } from "react-spinners";
 import axios from "axios";
+import moment from "moment";
 
 const LandingPage = () => {
   const [topStories, setTopStories] = useState<Array<StoryType>>();
@@ -78,7 +79,8 @@ const LandingPage = () => {
                 >
                   {item.by}
                 </a>
-                | {item.time} |
+                | {moment(item.time).format("MM/DD/YYYY, h:mm a")} |{" "}
+                {item.kids?.length} comments
               </span>
             </div>
           ))}

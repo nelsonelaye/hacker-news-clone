@@ -11,24 +11,24 @@ const Navigation = () => {
     { name: "best stories", route: "#" },
   ];
   return (
-    <main>
+    <header>
       <h1>Hacker News Clone</h1>
       <nav>
         <ul>
           {navs?.map((item) => (
             <li key={item.name}>
-              <NavLink
-                className={style["nav-link"]}
-                to={item.route}
+              <a
+                className={style["nav-link active"]}
+                href={item.route}
                 style={{ color: "inherit", textDecoration: "none" }}
               >
                 {item.name}
-              </NavLink>
+              </a>
             </li>
           ))}
         </ul>
       </nav>
-    </main>
+    </header>
   );
 };
 

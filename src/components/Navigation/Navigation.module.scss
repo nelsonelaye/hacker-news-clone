@@ -1,5 +1,8 @@
 @import "../../styles/base.scss";
 
+header {
+  width: 100%;
+}
 h1 {
   text-align: center;
   color: $orange;
@@ -26,11 +29,36 @@ li {
 }
 
 a:active {
-  font-weight: 600;
+  font-weight: bold;
 }
 
 .nav-link {
   :active {
     font-weight: 600;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  h1 {
+    margin-bottom: 30px;
+  }
+  li {
+    font-size: 16px;
+    padding: 0 10px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  header {
+    width: 90%;
+    margin: auto;
+  }
+  h1 {
+    font-size: 25px;
+    margin-bottom: 20px;
+  }
+  li {
+    font-size: 11px;
+    padding: 0 5px;
   }
 }

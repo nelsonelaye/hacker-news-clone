@@ -8,7 +8,7 @@ const Navigation = () => {
   const navs: Array<NavType> = [
     { name: "top stories", route: "/" },
     { name: "latest stories", route: "/latest-stories" },
-    { name: "best stories", route: "#" },
+    { name: "best stories", route: "/best-stories" },
   ];
   return (
     <header>
@@ -17,13 +17,16 @@ const Navigation = () => {
         <ul>
           {navs?.map((item) => (
             <li key={item.name}>
-              <a
-                className={style["nav-link active"]}
-                href={item.route}
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? style["active-nav-link"] : style["nav-link"]
+                }
+                // className={style["nav-link"]}
+                to={item.route}
                 style={{ color: "inherit", textDecoration: "none" }}
               >
                 {item.name}
-              </a>
+              </NavLink>
             </li>
           ))}
         </ul>

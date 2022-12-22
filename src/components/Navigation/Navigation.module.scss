@@ -32,10 +32,8 @@ a:active {
   font-weight: bold;
 }
 
-.nav-link {
-  :active {
-    font-weight: 600;
-  }
+.active-nav-link {
+  font-weight: bolder;
 }
 
 @media screen and (max-width: 768px) {

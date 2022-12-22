@@ -1,64 +1,88 @@
 import { useCallback, useEffect, useState } from "react";
 import Navigation from "../../components/Navigation";
-import axios from "axios";
+import "./LandingPage.module.scss";
+import style from "./LandingPage.module.scss";
 import { story as StoryType } from "./LandingPage.types";
 import { ClipLoader } from "react-spinners";
+import axios from "axios";
 
 const LandingPage = () => {
-  const [topStories, setTopStories] = useState(Array<StoryType>);
+  const [topStories, setTopStories] = useState<Array<StoryType>>();
+  const [storiesID, setStoriesID] = useState<Array<number>>();
+  const [loading, setLoading] = useState(false);
 
-  const [storiesID, setStoriesID] = useState([]);
-  const [loader, setLoader] = useState(false);
+  const getStories = async (id: number) => {
+    try {
+      const story = await axios.get(
+        `https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`
+      );
+      return story.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-  const fetchStories = useCallback(async () => {
-    let stories: Array<StoryType> = [];
+  const getIds = async () => {
+    try {
+      setLoading(true);
+      const result = await axios.get(
+        `https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty`
+      );
+      if (result) {
+        const data = result.data.slice(0, 30);
+        await Promise.all(data.map((id: number) => getStories(id))).then(
+          (res) => {
+            setTopStories(res);
+            console.log("Fetched res", res);
+          }
+        );
 
-    storiesID?.map(async (item) => {
-      await axios
-        .get(
-          `https://hacker-news.firebaseio.com/v0/item/${item}.json?print=pretty`
-        )
-        .then((res) => {
-          //   console.log("pushing", res);
-          stories.push(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    });
+        // setTopStories(stories);
+        // console.log("Fetched stories", stories);
+      }
 
-    await console.log("stories", stories);
-    setTopStories(stories);
-
-    setLoader(false);
-  }, []);
-
-  const getStoriesId = useCallback(async () => {
-    setLoader(true);
-    let url = `https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty`;
-
-    await axios
-      .get(url)
-      .then((res) => {
-        setStoriesID(res.data);
-        fetchStories();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
-    getStoriesId();
+    getIds();
   }, []);
   return (
     <>
       <Navigation />
 
-      {loader ? (
-        <ClipLoader />
+      {loading ? (
+        <div
+          style={{
+            textAlign: "center",
+            margin: "50px 0",
+          }}
+        >
+          <ClipLoader />
+        </div>
       ) : (
-        topStories?.map((item) => <div key={item.id}>{item.title}</div>)
+        <main>
+          {topStories?.map((item) => (
+            <div key={item.id} className={style["story-highlight"]}>
+              <a href={item.url}>
+                <h2>{item.title}</h2>
+              </a>
+              <span>
+                by
+                <a
+                  href={`https://news.ycombinator.com/user?id=${item.by}`}
+                  style={{ padding: "0 5px" }}
+                >
+                  {item.by}
+                </a>
+                | {item.time} |
+              </span>
+            </div>
+          ))}
+        </main>
       )}
     </>
   );

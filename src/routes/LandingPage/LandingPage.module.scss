@@ -1,0 +1,30 @@
+@import "../../styles/base.scss";
+
+main {
+  width: 60%;
+  margin: auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.story-highlight {
+  border: 2px solid $grey;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+
+  h2 {
+    font-size: 16px;
+    margin: 0 0 5px;
+    color: $orange;
+    font-weight: 500;
+  }
+
+  span {
+    font-size: 13px;
+    color: $brownish;
+  }
+}

@@ -9,3 +9,7 @@ export interface story {
   type?: string;
   url?: string;
 }
+
+export interface props {
+  pageUrl: string;
+}

@@ -1,6 +1,6 @@
 import PageLayout from "../../components/PageLayout";
 
-const LatestStories = () => {
+const BestStories = () => {
   return (
     <>
       <PageLayout pageUrl="https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty" />
@@ -8,4 +8,4 @@ const LatestStories = () => {
   );
 };
 
-export default LatestStories;
+export default BestStories;
